@@ -1,2 +1,3 @@
-# knowledge.db
-a knowledge and information system made for speeding up-solving problems
+# Knowledge.DB
+
+Where information meets simplicity
