@@ -13,10 +13,10 @@
 	<nav
 		class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
 	>
-		<a href="##" class="flex items-center gap-2 text-lg font-semibold md:text-base">
-			<Brain class="h-6 w-6" />
-			<span class="sr-only">Knowledge DB</span>
-		</a>
+		<Brain class="h-6 w-6" />
+		<span class="sr-only">Knowledge DB</span>
+
+		<!-- navbar links -->
 		<Link link="/dashboard" id={1}>Dashboard</Link>
 	</nav>
 	<Sheet.Root>
@@ -29,7 +29,7 @@
 		<Sheet.Content side="left">
 			<nav class="grid gap-6 text-lg font-medium">
 				<a href="##" class="flex items-center gap-2 text-lg font-semibold">
-					<Package2 class="h-6 w-6" />
+					<Brain class="h-6 w-6" />
 					<span class="sr-only">Knowledge DB</span>
 				</a>
 				<Link link="/dashboard" id={1}>Dashboard</Link>
@@ -48,7 +48,9 @@
 			<DropdownMenu.Content align="end">
 				<DropdownMenu.Label>My Account</DropdownMenu.Label>
 				<DropdownMenu.Separator />
-				<DropdownMenu.Item>Settings</DropdownMenu.Item>
+				<DropdownMenu.Item>
+					<Link id={3} link="/settings">Settings</Link>
+				</DropdownMenu.Item>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Item>Logout</DropdownMenu.Item>
 			</DropdownMenu.Content>
