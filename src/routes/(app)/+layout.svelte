@@ -14,14 +14,7 @@
 <div class="fixed bottom-16 right-16">
 	<Tooltip.Root>
 		<Tooltip.Trigger>
-			<Button
-				on:click={() => {
-					$navBarLinkSelected = 2;
-				}}
-				href="/new-entry"
-				variant="outline"
-				class="h-16 w-16"
-			>
+			<Button href="/new-entry" variant="outline" class="h-16 w-16">
 				<PlusIcon></PlusIcon>
 			</Button>
 		</Tooltip.Trigger>

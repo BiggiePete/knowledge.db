@@ -17,7 +17,8 @@
 		<span class="sr-only">Knowledge DB</span>
 
 		<!-- navbar links -->
-		<Link link="/dashboard" id={1}>Dashboard</Link>
+		<Link link="/dashboard">Dashboard</Link>
+		<Link link="/settings">Settings</Link>
 	</nav>
 	<Sheet.Root>
 		<Sheet.Trigger asChild let:builder>
@@ -32,7 +33,8 @@
 					<Brain class="h-6 w-6" />
 					<span class="sr-only">Knowledge DB</span>
 				</a>
-				<Link link="/dashboard" id={1}>Dashboard</Link>
+				<Link link="/dashboard">Dashboard</Link>
+				<Link link="/settings">Settings</Link>
 			</nav>
 		</Sheet.Content>
 	</Sheet.Root>
@@ -49,7 +51,7 @@
 				<DropdownMenu.Label>My Account</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Item>
-					<Link id={3} link="/settings">Settings</Link>
+					<Link link="/account">Account Settings</Link>
 				</DropdownMenu.Item>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Item>Logout</DropdownMenu.Item>

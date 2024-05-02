@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const navBarLinkSelected = writable(0);
+export const navBarLinkSelected = writable("");
