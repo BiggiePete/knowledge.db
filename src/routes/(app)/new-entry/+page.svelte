@@ -5,16 +5,26 @@
 	import CardHeader from '$lib/components/ui/card/card-header.svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import { toast } from 'svelte-sonner';
 	import type { PageData } from './$types';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { Brain, PlusIcon } from 'lucide-svelte';
 	import { superForm } from 'sveltekit-superforms';
+	import { navBarLinkSelected } from '../../../stores';
 
 	export let data: PageData;
 
-	const { form, errors, constraints } = superForm(data.form);
+	const { form, message } = superForm(data.form);
 	let steps_num = [0];
+	$navBarLinkSelected = '/new-entry';
+	$: if ($message) {
+		if (JSON.parse($message ?? '{}').status == 'OK') {
+			toast.success('Data has been entered', {
+				description: new Date().toLocaleDateString()
+			});
+		}
+	}
 </script>
 
 <Card class="m-4">
@@ -25,10 +35,11 @@
 		<div class="m-2 p-2">
 			<form method="post">
 				<span>Problem Prompt:</span>
-				<Input placeholder="x does not work" bind:value={$form.problem} />
+				<Input placeholder="x does not work" name="problem" bind:value={$form.problem} />
 				<br /><br />
 				<span>Description of the Problem:</span>
-				<Textarea placeholder="well you see . . " bind:value={$form.description}></Textarea>
+				<Textarea name="description" placeholder="well you see . . " bind:value={$form.description}
+				></Textarea>
 				<br /><br />
 				<div class="grid grid-cols-1 gap-4">
 					{#if steps_num}
@@ -42,7 +53,13 @@
 
 				<Tooltip.Root>
 					<Tooltip.Trigger>
-						<Button class="m-2" type="submit">Submit &nbsp;<Brain></Brain></Button>
+						<Button
+							class="m-2"
+							type="submit"
+							on:click={() => {
+								toast.message('Data uploading');
+							}}>Submit &nbsp;<Brain></Brain></Button
+						>
 					</Tooltip.Trigger>
 					<Tooltip.Content>
 						<p>Submits problem & solution to the DB</p>

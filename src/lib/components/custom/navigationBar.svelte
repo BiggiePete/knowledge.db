@@ -7,6 +7,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import Link from './link.svelte';
+	import Lightswitch from './lightswitch.svelte';
 </script>
 
 <header class="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -57,5 +58,6 @@
 				<DropdownMenu.Item>Logout</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>
+		<Lightswitch></Lightswitch>
 	</div>
 </header>
