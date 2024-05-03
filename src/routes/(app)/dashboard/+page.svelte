@@ -28,7 +28,7 @@
 	<Card class="m-2 max-w-full">
 		<CardHeader>Check the DB</CardHeader>
 		<CardContent>
-			<Label for="Search">Search your question</Label>
+			<Label for="Search">What's the problem?</Label>
 			<form method="post" use:enhance>
 				<div class="flex flex-grow-0">
 					<Input

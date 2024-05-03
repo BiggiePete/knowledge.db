@@ -20,9 +20,9 @@
 	$navBarLinkSelected = '/new-entry';
 	$: if ($message) {
 		if (JSON.parse($message ?? '{}').status == 'OK') {
-			toast.success('Data has been entered', {
-				description: new Date().toLocaleDateString()
-			});
+			setTimeout(() => {
+				toast.success('Success!');
+			}, 1000);
 		}
 	}
 </script>

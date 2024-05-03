@@ -1,6 +1,7 @@
 FROM oven/bun:latest
 WORKDIR /src
 COPY . .
+RUN bun i
 RUN bun run vite build
 
 FROM oven/bun:latest
