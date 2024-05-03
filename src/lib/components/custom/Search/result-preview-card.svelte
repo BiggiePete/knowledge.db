@@ -8,17 +8,20 @@
 	export let result: SearchResult;
 </script>
 
-<Card>
-	<CardHeader>
-		<h2 class="text-xl font-semibold">{result.title}</h2>
-		<hr />
-	</CardHeader>
-	<CardDescription>
-		<div class="m-2 p-2">
-			{result.summary}
-		</div>
-	</CardDescription>
-	<CardFooter>
-		Total Steps : {result.steps}
-	</CardFooter>
-</Card>
+<a href={'/entry/' + result.id}>
+	<Card>
+		<CardHeader>
+			<h2 class="text-xl font-semibold">{result.title}</h2>
+			<hr />
+		</CardHeader>
+		<CardDescription>
+			<div class="m-2 mt-0 p-2">
+				<h3 class="font-semibold">Summary</h3>
+				{result.summary}
+			</div>
+		</CardDescription>
+		<CardFooter>
+			Total Steps : {result.steps}
+		</CardFooter>
+	</Card></a
+>

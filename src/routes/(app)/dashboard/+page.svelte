@@ -9,6 +9,8 @@
 	import type { PageData } from './$types';
 	import { navBarLinkSelected } from '../../../stores';
 	import ResultPreviewCard from '$lib/components/custom/Search/result-preview-card.svelte';
+	import { PlusIcon } from 'lucide-svelte';
+	import * as Tooltip from '$lib/components/ui/tooltip';
 
 	export let data: PageData;
 	$navBarLinkSelected = '/dashboard'; // quick bug-fix for links
@@ -32,12 +34,25 @@
 <br />
 <hr />
 <br />
-<div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<div class="container grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 	<!-- display here the latest searches, in the format of a title, how many steps were involved, and a small summary of what the project / solution entails -->
 	<!-- TODO change if statement to check if there are any search results to show -->
-	{#if true}
+	{#if data.results.length > 0}
 		{#each data.results as result}
 			<ResultPreviewCard {result}></ResultPreviewCard>
 		{/each}
 	{/if}
+</div>
+
+<div class="fixed bottom-16 right-16">
+	<Tooltip.Root>
+		<Tooltip.Trigger>
+			<Button href="/new-entry" variant="outline" class="h-16 w-16">
+				<PlusIcon></PlusIcon>
+			</Button>
+		</Tooltip.Trigger>
+		<Tooltip.Content>
+			<p>Create a new Entry</p>
+		</Tooltip.Content>
+	</Tooltip.Root>
 </div>
