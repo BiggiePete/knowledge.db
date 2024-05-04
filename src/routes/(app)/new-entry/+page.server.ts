@@ -31,7 +31,7 @@ export const actions: Actions = {
 			return fail(400);
 		}
 		// console.log(form.data);
-		const r = await weaviate_client.data
+		weaviate_client.data
 			.creator()
 			.withClassName(Knowledge_entry.class)
 			.withProperties({
@@ -43,10 +43,7 @@ export const actions: Actions = {
 		return message(
 			form,
 			JSON.stringify({
-				status: 'OK',
-				data: {
-					id: r.id
-				}
+				status: 'OK'
 			})
 		);
 	}

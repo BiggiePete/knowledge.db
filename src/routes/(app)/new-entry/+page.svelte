@@ -57,7 +57,7 @@
 							class="m-2"
 							type="submit"
 							on:click={() => {
-								toast.message('Data uploading');
+								toast.message('Uploading Problem . . . ');
 							}}>Submit &nbsp;<Brain></Brain></Button
 						>
 					</Tooltip.Trigger>

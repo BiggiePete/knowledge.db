@@ -16,6 +16,10 @@ This project serves to be a tool that when hosted on a network, allows users of 
 - dockerization
 - make a blurb about it to put on a website or something
 
+## Game plan
+
+data is stored using the ID number primarily from weaviate. but the game plan is to store the data in serialized form into the vector database, and then store all the steps and more relational information into the prisma relational db
+
 ## FOSS
 
 This project and the tools within it, are and will remain free to the public

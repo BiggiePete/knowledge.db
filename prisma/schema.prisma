@@ -9,3 +9,35 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String    @id @default(uuid())
+  username      String    @unique
+  password_hash String
+  points        BigInt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  session       String?
+  problem       Problem[]
+}
+
+model Problem {
+  id          String   @id @default(uuid())
+  problemText String
+  description String?
+  creator     User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  steps       Step[]
+  userId      String
+}
+
+model Step {
+  id        String   @id @default(uuid())
+  title     String
+  idx       Int
+  content   String?
+  optional  Boolean  @default(value: false)
+  Problem   Problem? @relation(fields: [problemId], references: [id])
+  problemId String?
+}
