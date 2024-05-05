@@ -1,16 +1,16 @@
 ---
 version: '3.4'
 services:
-  knowledge:
-    build:
-      dockerfile: knowledge.db.dockerfile
-    ports:
-      - 7878:3000
-    volumes:
-      - ./knowledge_db_data:/prisma/data
-    restart: on-failure:0
-    depends_on:
-      - weaviate
+  # knowledge:
+  #   build:
+  #     dockerfile: knowledge.db.dockerfile
+  #   ports:
+  #     - 7878:3000
+  #   volumes:
+  #     - ./knowledge_db_data:/prisma/data
+  #   restart: on-failure:0
+  #   depends_on:
+  #     - weaviate
   weaviate:
     command:
       - --host
@@ -27,9 +27,8 @@ services:
       - ./weaviate_data:/var/lib/weaviate
     restart: on-failure:0
     environment:
-      # CONTEXTIONARY_URL: contextionary:9999
       TRANSFORMERS_INFERENCE_API: 'http://t2v-transformers:8080'
-      # QNA_INFERENCE_API: 'http://qna-transformers:8080'
+      QNA_INFERENCE_API: 'http://qna-transformers:8080'
       SUM_INFERENCE_API: 'http://sum-transformers:8080'
       QUERY_DEFAULTS_LIMIT: 25
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
@@ -47,8 +46,9 @@ services:
     image: cr.weaviate.io/semitechnologies/sum-transformers:google-pegasus-xsum-1.2.0
     environment:
       ENABLE_CUDA: '0'
-  # qna-transformers:
-  #   image: cr.weaviate.io/semitechnologies/qna-transformers:distilbert-base-uncased-distilled-squad
-  #   environment:
-  #     ENABLE_CUDA: '0'
+
+  qna-transformers:
+    image: cr.weaviate.io/semitechnologies/qna-transformers:distilbert-base-uncased-distilled-squad
+    environment:
+      ENABLE_CUDA: '0'
 ...
