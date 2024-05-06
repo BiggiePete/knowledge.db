@@ -1,5 +1,4 @@
 <script lang="ts">
-	import StepField from '$lib/components/custom/new_item/step_field.svelte';
 	import { Card } from '$lib/components/ui/card';
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import CardHeader from '$lib/components/ui/card/card-header.svelte';
@@ -10,23 +9,24 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip';
 	import { Brain, PlusIcon } from 'lucide-svelte';
-	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { navBarLinkSelected } from '../../../stores';
 
 	export let data: PageData;
-
-	const { form, message } = superForm(data.form);
-	let steps_num = [0];
+	const { form, message, constraints, errors } = superForm(data.form, {
+		dataType: 'json'
+	});
 	$navBarLinkSelected = '/new-entry';
 	$: if ($message) {
 		if (JSON.parse($message ?? '{}').status == 'OK') {
 			setTimeout(() => {
 				toast.success('Success!');
-			}, 1000);
+			}, 200);
 		}
 	}
 </script>
 
+<SuperDebug data={$form}></SuperDebug>
 <Card class="m-4">
 	<CardHeader>
 		<h2 class="text-xl font-semibold">New problem?</h2>
@@ -42,11 +42,23 @@
 				></Textarea>
 				<br /><br />
 				<div class="grid grid-cols-1 gap-4">
-					{#if steps_num}
-						{#each steps_num as _, step}
-							<StepField form={data.form}></StepField>
-						{/each}
-					{/if}
+					{#each $form.steps as _, step_id}
+						<Card>
+							<CardHeader>
+								<Input
+									type="text"
+									placeholder="step 1 . . ."
+									bind:value={$form.steps[step_id].step_title}
+								/>
+								<br />
+								<Textarea
+									rows={4}
+									placeholder="lorem ipsulem"
+									bind:value={$form.steps[step_id].step_text}
+								></Textarea>
+							</CardHeader>
+						</Card>
+					{/each}
 				</div>
 				<br />
 				<br />
@@ -73,8 +85,11 @@
 							variant="outline"
 							class="h-12 w-12"
 							on:click={() => {
-								steps_num.push(0);
-								steps_num = steps_num;
+								$form.steps.push({
+									step_title: 'Step : ' + ($form.steps.length + 1),
+									step_text: ''
+								});
+								$form = $form;
 							}}
 						>
 							<PlusIcon></PlusIcon>
